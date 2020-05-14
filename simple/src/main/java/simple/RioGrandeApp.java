@@ -255,7 +255,7 @@ public final class RioGrandeApp extends Application {
 	 * 
 	 */
 	private void updateViewFromModel() {
-		if (data.getPopulation() <= 0) {
+		if (data.getCurrentPopulation() <= 0) {
 			endTurn.setDisable(true);
 		}
 		final DecimalFormat turnFormat = new DecimalFormat("Turn ###0");
@@ -268,8 +268,8 @@ public final class RioGrandeApp extends Application {
 		}
 
 		final DecimalFormat decimalFormat = new DecimalFormat("0.#");
-		populationLabel.setText(String.format("Pop.: %s/%d (%s)", decimalFormat.format(data.getPopulation()),
-				data.getPopulationMax(), decimalFormat.format(data.getPopulationDelta())));
+		populationLabel.setText(String.format("Pop.: %s/%d (%s)", decimalFormat.format(data.getCurrentPopulation()),
+				data.getMaximumPopulation(), decimalFormat.format(data.getPopulationDelta())));
 
 		foodLabel.setText(String.format("Food: %.1f", data.getFood()));
 

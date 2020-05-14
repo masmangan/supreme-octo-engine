@@ -19,20 +19,16 @@ import javafx.application.Application;
  */
 
 public final class RioGrandeAppLauncher {
-	/**
-	 * 
-	 */
+	/** */
 	private static final Logger LOGGER = Logger.getLogger(RioGrandeAppLauncher.class.getName());
 
-	/**
-	 * 
-	 */
+	/** */
 	private RioGrandeAppLauncher() {
 	}
 
 	/**
 	 * 
-	 * @param args
+	 * @param args not used
 	 */
 	public static void main(final String... args) {
 		LOGGER.setLevel(Level.ALL);

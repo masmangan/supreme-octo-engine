@@ -13,75 +13,63 @@ import java.util.logging.Logger;
  *
  */
 public final class RioGrandeAppData {
-	/**
-	 * 
-	 */
+	/** */
 	private static final Logger LOGGER = Logger.getLogger(RioGrandeAppData.class.getName());
 
-	/**
-	 * 
-	 */
+	/** */
 	private int turn;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private int date;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private int dateRate;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float population;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private int populationMax;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float populationRate;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float work;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float workRate;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float food;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float culture;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float cultureRate;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private float threat;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private int forestWorkers;
-	/**
-	 * 
-	 */
+	
+	/** */
 	private int forestWorkersMax;
-	/**
-	 * 
-	 */
-	private int defenseForce;
-	/**
-	 * 
-	 */
+		
+	/** */
 	private boolean endGame;
+
+	private int defense;
+
+	public int getDefense() {
+		return defense;
+	}
+
+	private void setDefense(int defense) {
+		this.defense = defense;
+	}
 
 	/**
 	 * @return
@@ -93,7 +81,7 @@ public final class RioGrandeAppData {
 	/**
 	 * @param forestWorkersMax
 	 */
-	public void setForestWorkersMax(int forestWorkersMax) {
+	private void setForestWorkersMax(int forestWorkersMax) {
 		this.forestWorkersMax = forestWorkersMax;
 	}
 
@@ -107,7 +95,7 @@ public final class RioGrandeAppData {
 	/**
 	 * @param forestWorkers
 	 */
-	public void setForestWorkers(int forestWorkers) {
+	void setForestWorkers(int forestWorkers) {
 		this.forestWorkers = Math.min(forestWorkers, forestWorkersMax);
 	}
 
@@ -120,9 +108,10 @@ public final class RioGrandeAppData {
 		setDate(-4000 * 1000);
 		setDateRate(200 * 1000);
 
-		setPopulation(8.0f);
-		setPopulationMax(12);
-		setPopulationRate(-0.4f);
+		setCurrentPopulation(8.0f);
+		setDefense(8);
+		setMaximumPopulation(12);
+		setPopulationGrowthRatePerTurn(-0.4f);
 
 		setFood(-8.0f);
 
@@ -166,42 +155,42 @@ public final class RioGrandeAppData {
 	/**
 	 * @return
 	 */
-	public float getPopulation() {
+	public float getCurrentPopulation() {
 		return population;
 	}
 
 	/**
 	 * @param population
 	 */
-	public void setPopulation(float population) {
+	public void setCurrentPopulation(float population) {
 		this.population = population;
 	}
 
 	/**
 	 * @return
 	 */
-	public int getPopulationMax() {
+	public int getMaximumPopulation() {
 		return populationMax;
 	}
 
 	/**
 	 * @param populationMax
 	 */
-	public void setPopulationMax(int populationMax) {
+	public void setMaximumPopulation(int populationMax) {
 		this.populationMax = populationMax;
 	}
 
 	/**
 	 * @return
 	 */
-	public float getPopulationRate() {
+	public float getPopulationGrowthRatePerTurn() {
 		return populationRate;
 	}
 
 	/**
 	 * @param populationRate
 	 */
-	public void setPopulationRate(float populationRate) {
+	public void setPopulationGrowthRatePerTurn(float populationRate) {
 		this.populationRate = populationRate;
 	}
 
@@ -290,6 +279,7 @@ public final class RioGrandeAppData {
 	}
 
 	/**
+	 * Updates game data for current turn.
 	 * 
 	 */
 	public void tick() {
@@ -316,7 +306,7 @@ public final class RioGrandeAppData {
 			dateRate = 1;
 		}
 
-		float foodConsumed = getPopulation();
+		float foodConsumed = getCurrentPopulation();
 		float foodFromForestModifier = 2.4f;
 		float foodFromForest = foodFromForestModifier * getForestWorkers();
 
@@ -346,7 +336,7 @@ public final class RioGrandeAppData {
 			newPopulation = 0.0f;
 		}
 		population = newPopulation;
-		defenseForce += (newPopulation - population); //
+		defense += (newPopulation - population); //
 		population = newPopulation;
 
 		if (population == 0.0) {
@@ -375,7 +365,7 @@ public final class RioGrandeAppData {
 	 */
 	public float getPopulationDelta() {
 		// TODO: duplicate code...
-		float foodConsumed = getPopulation();
+		float foodConsumed = getCurrentPopulation();
 		float foodFromForestModifier = 2.4f;
 		float foodFromForest = foodFromForestModifier * getForestWorkers();
 
@@ -383,5 +373,9 @@ public final class RioGrandeAppData {
 
 		float populationDelta = (float) (foodTotal / 20.0);
 		return populationDelta;
+	}
+
+	public int getStrengthLevel() {
+		return defense;
 	}
 }
