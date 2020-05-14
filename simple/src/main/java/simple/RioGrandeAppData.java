@@ -4,7 +4,7 @@
 
 package simple;
 
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 /**
  * The <code>RioGrandeAppData</code> class
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public final class RioGrandeAppData {
 	/** */
-	private static final Logger LOGGER = Logger.getLogger(RioGrandeAppData.class.getName());
+	//private static final Logger LOGGER = Logger.getLogger(RioGrandeAppData.class.getName());
 
 	/** */
 	private int turn;

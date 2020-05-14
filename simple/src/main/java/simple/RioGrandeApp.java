@@ -237,7 +237,7 @@ public final class RioGrandeApp extends Application {
 //		Node appContent = new VBox(gatheringSlider, huntingSlider, workingSlider, worshipingSlider, farmingSlider,
 //				fishingSlider);
 		Node settlementPane = new HBox(gatheringSlider);
-		Node techsPane = new HBox();
+		//Node techsPane = new HBox();
 
 		Node panes = new StackPane(settlementPane);
 		borderPane.setTop(headerHBox);
