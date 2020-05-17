@@ -349,11 +349,13 @@ public final class RioGrandeAppData {
 	/**
 	 * @return
 	 */
-	public int getDateRate() {
-		return dateRate;
-	}
+//	public int getDateRate() {
+//		return dateRate;
+//	}
 
 	/**
+	 * Change date delta between ticks.
+	 * 
 	 * @param dateRate
 	 */
 	public void setDateRate(int dateRate) {
@@ -377,5 +379,15 @@ public final class RioGrandeAppData {
 
 	public int getStrengthLevel() {
 		return defense;
+	}
+
+	public String getAge() {
+		// TODO complete age
+		return "Antiquity";
+	}
+
+	public float getStrengthBonus() {
+		// TODO complete strength bonus
+		return 0;
 	}
 }

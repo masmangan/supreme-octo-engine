@@ -7,10 +7,11 @@ import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.junit.JUnitStory;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
 import org.jbehave.core.steps.InstanceStepsFactory;
+
+import simple.steps.GameStartSteps;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
@@ -33,7 +34,7 @@ public class GameStartStories extends JUnitStories {
  
     @Override
     protected List<String> storyPaths() {
-        return Arrays.asList("game-start.story");
+        return Arrays.asList("stories/game-start.story");
     }
  
 }
