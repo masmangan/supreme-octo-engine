@@ -7,16 +7,21 @@ import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.steps.Steps;
 
-import simple.RioGrandeAppData;
+import simple.GameData;
 
+/**
+ * 
+ * @author marco.mangan@gmail.com
+ *
+ */
 public class GameStartSteps extends Steps {
 
 	public static final double EPSILON = 0.01;
-	public RioGrandeAppData data;
+	public GameData data;
 
 	@Given("a new game")
 	public void before() {
-		data = new RioGrandeAppData();
+		data = new GameData();
 	}
 
 	@Then("current population is $population humans")
@@ -33,56 +38,120 @@ public class GameStartSteps extends Steps {
 		assertEquals(expected, actual);
 	}
 
-	@Then("population growth rate per turn is $rate")
+	@Then("population growth rate per turn is $rate humans/turn")
 	public void testGameStartsWithLowPopulationIncrease(float rate) {
 		float expected = rate;
 		float actual = data.getPopulationDelta();
-		assertEquals(expected, actual, 0.01);
+		assertEquals(expected, actual, EPSILON);
 	}
 
 	@Then("every 20 food units adds 1 human")
-	@Pending
 	public void thenEvery20FoodUnitsAdds1Human() {
-	  // PENDING
+		float expected = 20;
+		float actual = data.getFoodPerNewHuman();
+		assertEquals(expected, actual, EPSILON);
 	}
 
-	@Then("food growth per turn is -8 units")
-	@Pending
+	@Then("food growth per turn is -8 food units/turn")
 	public void thenFoodGrowthPerTurnIs8Units() {
-	  // PENDING
+		float expected = -8.0f;
+		float actual = data.getFoodGrowthPerTurn();
+		assertEquals(expected, actual, EPSILON);
 	}
 
-	@Then("food consumed per turn is 8 units")
-	@Pending
+	@Then("food consumed per turn is 8 food units/turn")
 	public void thenFoodConsumedPerTurnIs8Units() {
-	  // PENDING
+		float expected = 8.0f;
+		float actual = data.getFoodConsumedPerTurn();
+		assertEquals(expected, actual, EPSILON);
 	}
 
-	@Then("food from forests per worker is 2.4 units")
+	@Then("food from forests per worker is 2.4 food units/gatherer")
 	@Pending
 	public void thenFoodFromForestsPerWorkerIs24Units() {
-	  // PENDING
+		// PENDING
 	}
 
-	@Then("food from savanna per worker is 0 units")
+	@Then("food from savanna per worker is 0 food units/hunter")
 	@Pending
 	public void thenFoodFromSavannaPerWorkerIs0Units() {
-	  // PENDING
+		// PENDING
 	}
 
-	@Then("food from rivers per fisherman is 0 units")
+	@Then("food from rivers per fisherman is 0 food units/fisherman")
 	@Pending
 	public void thenFoodFromRiversPerFishermanIs0Units() {
-	  // PENDING
+		// PENDING
 	}
 
-	@Then("food from fields per farmer is 0 units")
+	@Then("food from fields per farmer is 0 food units/farmer")
 	@Pending
 	public void thenFoodFromFieldsPerFarmerIs0Units() {
-	  // PENDING
-	}	
+		// PENDING
+	}
+
+	@Then("production growth per turn is 1.6 production units/turn")
+	@Pending
+	public void thenProductionGrowthPerTurnIs16() {
+		// PENDING
+	}
 	
-	
+	@Then("production total points is 0")
+	public void thenProductionTotalPointsIs0() {
+		float expected = 0.0f;
+		float actual = data.getWork();
+		assertEquals(expected, actual, EPSILON);
+	}
+
+	@Then("passive production points per turn is 1.6")
+	@Pending
+	public void thenPassiveProductionPointsPerTurnIs16() {
+		// PENDING
+	}
+
+	@Then("production from mountains per turn is 0")
+	@Pending
+	public void thenProductionFromMountainsPerTurnIs0() {
+		// PENDING
+	}
+
+	@Then("culture growth per turn is 1.6")
+	@Pending
+	public void thenCultureGrowthPerTurnIs16() {
+		// PENDING
+	}
+
+	@Then("total culture is 0")
+	public void thenTotalCultureIs0() {
+		float expected = 0.0f;
+		float actual = data.getCulture();
+		assertEquals(expected, actual, EPSILON);
+	}
+
+	@Then("culture needed for next level is 5")
+	@Pending
+	public void thenCultureNeededForNextLevelIs5() {
+		// PENDING
+	}
+
+	@Then("technology level is 1")
+	@Pending
+	public void thenTechnologyLevelIs1() {
+		// PENDING
+	}
+
+	@Then("passive culture per turn is 1.6")
+	@Pending
+	public void thenPassiveCulturePerTurnIs16() {
+		// PENDING
+	}
+
+	@Then("culture from worshipping per turn is 0")
+	@Pending
+	public void thenCultureFromWorshippingPerTurnIs0() {
+		// PENDING
+	}
+
 	@Then("current turn is 1")
 	public void thenCurrentTurnIs1() {
 		int expected = 1;
@@ -115,74 +184,16 @@ public class GameStartSteps extends Steps {
 	public void thenChanceOfInvasionIs0() {
 		float expected = 0f;
 		float actual = data.getThreat();
-		assertEquals(expected, actual, 0.01);
+		assertEquals(expected, actual, EPSILON);
 	}
 
 	@Then("strength bonus is 0 %")
 	public void thenStrengthBonusIs0() {
 		float expected = 0f;
 		float actual = data.getStrengthBonus();
-		assertEquals(expected, actual, 0.01);
-	}
-	
-	@Then("production growth per turn is 1.6")
-	@Pending
-	public void thenProductionGrowthPerTurnIs16() {
-	  // PENDING
+		assertEquals(expected, actual, EPSILON);
 	}
 
-	@Then("production total points is 0")
-	@Pending
-	public void thenProductionTotalPointsIs0() {
-	  // PENDING
-	}
 
-	@Then("passive production points per turn is 1.6")
-	@Pending
-	public void thenPassiveProductionPointsPerTurnIs16() {
-	  // PENDING
-	}
-
-	@Then("production from mountains per turn is 0")
-	@Pending
-	public void thenProductionFromMountainsPerTurnIs0() {
-	  // PENDING
-	}
-
-	@Then("culture growth per turn is 1.6")
-	@Pending
-	public void thenCultureGrowthPerTurnIs16() {
-	  // PENDING
-	}
-
-	@Then("total culture is 0")
-	@Pending
-	public void thenTotalCultureIs0() {
-	  // PENDING
-	}
-
-	@Then("culture needed for next level is 5")
-	@Pending
-	public void thenCultureNeededForNextLevelIs5() {
-	  // PENDING
-	}
-
-	@Then("technology level is 1")
-	@Pending
-	public void thenTechnologyLevelIs1() {
-	  // PENDING
-	}
-
-	@Then("passive culture per turn is 1.6")
-	@Pending
-	public void thenPassiveCulturePerTurnIs16() {
-	  // PENDING
-	}
-
-	@Then("culture from worshipping per turn is 0")
-	@Pending
-	public void thenCultureFromWorshippingPerTurnIs0() {
-	  // PENDING
-	}
 	
 }

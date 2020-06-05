@@ -16,6 +16,11 @@ import simple.steps.GameStartSteps;
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
 import static org.jbehave.core.reporters.Format.CONSOLE;
 
+/**
+ * 
+ * @author marco.mangan@gmail.com
+ *
+ */
 public class GameStartStories extends JUnitStories {
  
     @Override

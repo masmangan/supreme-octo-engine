@@ -1,4 +1,5 @@
-Rio Grande Game
+ Game
+
 
 Narrative:
 As a gamer
@@ -10,27 +11,36 @@ Scenario: Population at game start
 Given a new game
 Then current population is 8 humans
 And maximum population is 12 humans
-And population growth rate per turn is -0.4
+And population growth rate per turn is -0.4 humans/turn
+
+Scenario: First play at game start
+
+Given a new game
+When one human is allocated from food gathering
+And end turn
+Then current population is 8 humans
+And maximum population is 12 humans
+And population growth rate per turn is -0.3 humans/turn
 
 Scenario: Food at game start
 
 Given a new game
 Then every 20 food units adds 1 human
-And food growth per turn is -8 units
-And food consumed per turn is 8 units
-And food from forests per worker is 2.4 units
-And food from savanna per worker is 0 units
-And food from rivers per fisherman is 0 units
-And food from fields per farmer is 0 units
-	
+And food growth per turn is -8 food units/turn
+And food consumed per turn is 8 food units/turn
+And food from forests per worker is 2.4 food units/gatherer
+And food from savanna per worker is 0 food units/hunter
+And food from rivers per fisherman is 0 food units/fisherman
+And food from fields per farmer is 0 food units/farmer
+
 Scenario: Production at game start
 	
 Given a new game
-Then production growth per turn is 1.6
+Then production growth per turn is 1.6 production units/turn
 And production total points is 0
 And passive production points per turn is 1.6
-And production from mountains per turn is 0
-	
+And production from mountains per turn is 0 
+
 Scenario: Culture at game start
 	
 Given a new game	

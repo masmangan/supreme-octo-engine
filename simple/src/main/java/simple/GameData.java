@@ -7,66 +7,76 @@ package simple;
 //import java.util.logging.Logger;
 
 /**
- * The <code>RioGrandeAppData</code> class
+ * The <code>GameData</code> class
  * 
- * @author marco
+ * @author marco.mangan@gmail.com
  *
  */
-public final class RioGrandeAppData {
+public final class GameData {
 	/** */
-	//private static final Logger LOGGER = Logger.getLogger(RioGrandeAppData.class.getName());
+	// private static final Logger LOGGER =
+	// Logger.getLogger(GameData.class.getName());
 
 	/** */
 	private int turn;
-	
+
 	/** */
 	private int date;
-	
+
 	/** */
 	private int dateRate;
-	
+
 	/** */
 	private float population;
-	
+
 	/** */
 	private int populationMax;
-	
+
 	/** */
 	private float populationRate;
-	
+
 	/** */
 	private float work;
-	
+
 	/** */
 	private float workRate;
-	
+
 	/** */
 	private float food;
-	
+
 	/** */
 	private float culture;
-	
+
 	/** */
 	private float cultureRate;
-	
+
 	/** */
 	private float threat;
-	
+
 	/** */
 	private int forestWorkers;
-	
+
 	/** */
 	private int forestWorkersMax;
-		
+
 	/** */
 	private boolean endGame;
 
+	/** */
 	private int defense;
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getDefense() {
 		return defense;
 	}
 
+	/**
+	 * 
+	 * @param defense
+	 */
 	private void setDefense(int defense) {
 		this.defense = defense;
 	}
@@ -102,7 +112,7 @@ public final class RioGrandeAppData {
 	/**
 	 * 
 	 */
-	public RioGrandeAppData() {
+	public GameData() {
 		setTurn(1);
 
 		setDate(-4000 * 1000);
@@ -314,18 +324,25 @@ public final class RioGrandeAppData {
 
 		float populationDelta = (float) (foodTotal / 20.0);
 
-		System.out.println("POPULATION\n");
+		System.out.println("A) POPULATION\n");
+		System.out.println("Employed tribesmen produce valuable resources. ");
 
-		System.out.println("Current Population: " + population);
-		System.out.println("Population Max: " + populationMax);
+		System.out.println("- Current Population: " + population);
+		System.out.println("- Maximum Population: " + populationMax);
+		System.out.println("- Pop. growth rate/turn: " + populationDelta);
 
-		System.out.println("Pop. growth rate per turn: " + populationDelta);
+		System.out.println("\nB) FOOD\n");
+		System.out.println("Food - population growth. Every 20 food add 1 human. ");
 
-		System.out.println("\nFOOD\n");
-
-		System.out.println("Food growth per turn: " + foodTotal);
-		System.out.println("Food consumed per turn: " + foodConsumed);
-		System.out.println("Food from forests per workers: " + foodFromForestModifier);
+		System.out.println("- Food growth/turn: " + foodTotal);
+		System.out.println("- Food consumed per turn: " + foodConsumed);
+		System.out.println("- Food from forests/worker: " + foodFromForestModifier);
+		int foodFromSavannatModifier = 0;
+		System.out.println("- Food from savanna/worker: " + foodFromSavannatModifier);
+		int foodFromRiversModifier = 0;
+		System.out.println("- Food from rivers/fisherman: " + foodFromRiversModifier);
+		int foodFromFieldsModifier = 0;
+		System.out.println("- Food from fields/farmer: " + foodFromFieldsModifier);
 
 		float newPopulation = population;
 		newPopulation += populationDelta;
@@ -344,6 +361,33 @@ public final class RioGrandeAppData {
 		}
 
 		food = foodTotal;
+
+		System.out.println("\nC) PRODUCTION\n");
+		System.out.println("Production affects the evolution of your tribe and the construction of buildings.");
+		
+		int productionGrowth=0;
+		System.out.println("- Production growth/turn: " + productionGrowth);
+		int productionTotal=0;
+		System.out.println("- Total production points: " + productionTotal);
+		int productionPassiveGrowth=0;
+		System.out.println("- Passive prod. points/turn: " + productionPassiveGrowth);
+		int productionFromMountains=0;
+		System.out.println("- Production from mountains per turn: " + productionFromMountains);
+		
+		System.out.println("\nD) CULTURE\n");
+		System.out.println("Culture unlocks technologies.");
+		
+		System.out.println("\nE) STRENGTH\n");
+		System.out.println("Strength provides protection from uninvited guests.");
+		
+		System.out.println("\nF) TURNS\n");
+		System.out.println("Turns reflect the current year and effect the development of humanity.");
+		
+		System.out.println("- Current turn: " + getTurn());
+		System.out.println("- " + getAge() + ": " + getDate() / 1000 + " years B.C.");
+
+
+
 	}
 
 	/**
@@ -373,21 +417,57 @@ public final class RioGrandeAppData {
 
 		float foodTotal = foodFromForest - foodConsumed;
 
-		float populationDelta = (float) (foodTotal / 20.0);
+		float populationDelta = (float) (foodTotal / getFoodPerNewHuman());
 		return populationDelta;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getStrengthLevel() {
 		return defense;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getAge() {
 		// TODO complete age
 		return "Antiquity";
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public float getStrengthBonus() {
 		// TODO complete strength bonus
 		return 0;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public float getFoodPerNewHuman() {
+		return 20.0f;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public float getFoodGrowthPerTurn() {
+		float foodConsumed = getCurrentPopulation();
+		float foodFromForestModifier = 2.4f;
+		float foodFromForest = foodFromForestModifier * getForestWorkers();
+
+		return foodFromForest - foodConsumed;
+	}
+
+	public float getFoodConsumedPerTurn() {
+		return getCurrentPopulation();
 	}
 }

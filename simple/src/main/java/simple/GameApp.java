@@ -28,17 +28,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * The <code>RioGrandeApp</code> class
+ * The <code>GameData</code> class
  * 
  * @author marco.mangan@gmail.com
  *
  */
-public final class RioGrandeApp extends Application {
+public final class GameApp extends Application {
 	/** Helper for debugging and diagnosing */
-	private static final Logger LOGGER = Logger.getLogger(RioGrandeApp.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(GameApp.class.getName());
 
 	/** Application data */
-	private RioGrandeAppData data = new RioGrandeAppData();
+	private GameData data = new GameData();
 
 	/** Current game date with finer scale for later dates */
 	private Label dateLabel;
@@ -246,7 +246,7 @@ public final class RioGrandeApp extends Application {
 
 		Scene scene = new Scene(borderPane, 480 * 16 / 9, 480);
 		// stage.getIcons().add(new
-		// Image(RioGrandeApp.class.getResourceAsStream("file:riogrande.png")));
+		// Image(GameApp.class.getResourceAsStream("file:game.png")));
 		stage.setScene(scene);
 		stage.show();
 	}
