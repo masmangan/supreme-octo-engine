@@ -1,4 +1,4 @@
- Game
+ Game Start
 
 
 Narrative:
@@ -13,14 +13,6 @@ Then current population is 8 humans
 And maximum population is 12 humans
 And population growth rate per turn is -0.4 humans/turn
 
-Scenario: First play at game start
-
-Given a new game
-When one human is allocated from food gathering
-And end turn
-Then current population is 8 humans
-And maximum population is 12 humans
-And population growth rate per turn is -0.3 humans/turn
 
 Scenario: Food at game start
 

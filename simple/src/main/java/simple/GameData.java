@@ -17,23 +17,9 @@ public final class GameData {
 	// private static final Logger LOGGER =
 	// Logger.getLogger(GameData.class.getName());
 
-	/** */
-	private int turn;
+	private DateParameter dateParameters;
 
-	/** */
-	private int date;
-
-	/** */
-	private int dateRate;
-
-	/** */
-	private float population;
-
-	/** */
-	private int populationMax;
-
-	/** */
-	private float populationRate;
+	private PopulationParameters populationParameters;
 
 	/** */
 	private float work;
@@ -105,7 +91,7 @@ public final class GameData {
 	/**
 	 * @param forestWorkers
 	 */
-	void setForestWorkers(int forestWorkers) {
+	public void setForestWorkers(int forestWorkers) {
 		this.forestWorkers = Math.min(forestWorkers, forestWorkersMax);
 	}
 
@@ -113,15 +99,11 @@ public final class GameData {
 	 * 
 	 */
 	public GameData() {
-		setTurn(1);
+		dateParameters = new DateParameter();
+		populationParameters = new PopulationParameters();		
 
-		setDate(-4000 * 1000);
-		setDateRate(200 * 1000);
 
-		setCurrentPopulation(8.0f);
 		setDefense(8);
-		setMaximumPopulation(12);
-		setPopulationGrowthRatePerTurn(-0.4f);
 
 		setFood(-8.0f);
 
@@ -138,70 +120,64 @@ public final class GameData {
 	 * @return
 	 */
 	public int getTurn() {
-		return turn;
-	}
-
-	/**
-	 * @param turn
-	 */
-	public void setTurn(int turn) {
-		this.turn = turn;
+		return dateParameters.getTurn();
 	}
 
 	/**
 	 * @return
 	 */
 	public int getDate() {
-		return date;
+		return dateParameters.getDate();
 	}
 
 	/**
-	 * @param date
+	 * 
+	 * @return
 	 */
-	public void setDate(int date) {
-		this.date = date;
+	public String getAge() {
+		return dateParameters.getAge();
 	}
 
 	/**
 	 * @return
 	 */
 	public float getCurrentPopulation() {
-		return population;
+		return populationParameters.getPopulation();
 	}
 
 	/**
 	 * @param population
 	 */
 	public void setCurrentPopulation(float population) {
-		this.population = population;
+		this.populationParameters.setPopulation(population);
 	}
 
 	/**
 	 * @return
 	 */
 	public int getMaximumPopulation() {
-		return populationMax;
+		return populationParameters.getPopulationMax();
 	}
 
 	/**
 	 * @param populationMax
 	 */
 	public void setMaximumPopulation(int populationMax) {
-		this.populationMax = populationMax;
+		this.populationParameters.setPopulationMax(populationMax);
 	}
 
 	/**
 	 * @return
 	 */
 	public float getPopulationGrowthRatePerTurn() {
-		return populationRate;
+		return populationParameters.getPopulationRate();
 	}
 
 	/**
 	 * @param populationRate
 	 */
 	public void setPopulationGrowthRatePerTurn(float populationRate) {
-		this.populationRate = populationRate;
+		this.populationParameters.setPopulationRate(populationRate);
 	}
 
 	/**
@@ -297,24 +273,8 @@ public final class GameData {
 			return;
 		}
 
-		turn++;
-		date += dateRate;
-
-		if (date == -2600 * 1000) {
-			dateRate = 100 * 1000;
-		} else if (date == -800 * 1000) {
-			dateRate = 50 * 1000;
-		} else if (date == -450 * 1000) {
-			dateRate = 20 * 1000;
-		} else if (date == -210 * 1000) {
-			dateRate = 10 * 1000;
-		} else if (date == -50 * 1000) {
-			dateRate = 2 * 1000;
-		} else if (date == -36 * 1000) {
-			dateRate = 1 * 1000;
-		} else if (date == -4 * 1000) {
-			dateRate = 1;
-		}
+		dateParameters.incrementTurn();
+		dateParameters.incrementDate();
 
 		float foodConsumed = getCurrentPopulation();
 		float foodFromForestModifier = 2.4f;
@@ -327,8 +287,8 @@ public final class GameData {
 		System.out.println("A) POPULATION\n");
 		System.out.println("Employed tribesmen produce valuable resources. ");
 
-		System.out.println("- Current Population: " + population);
-		System.out.println("- Maximum Population: " + populationMax);
+		System.out.println("- Current Population: " + populationParameters.getPopulation());
+		System.out.println("- Maximum Population: " + populationParameters.getPopulationMax());
 		System.out.println("- Pop. growth rate/turn: " + populationDelta);
 
 		System.out.println("\nB) FOOD\n");
@@ -344,19 +304,19 @@ public final class GameData {
 		int foodFromFieldsModifier = 0;
 		System.out.println("- Food from fields/farmer: " + foodFromFieldsModifier);
 
-		float newPopulation = population;
+		float newPopulation = populationParameters.getPopulation();
 		newPopulation += populationDelta;
-		if (newPopulation > populationMax) {
-			newPopulation = populationMax;
+		if (newPopulation > populationParameters.getPopulationMax()) {
+			newPopulation = populationParameters.getPopulationMax();
 		}
 		if (newPopulation < 0.1f) {
 			newPopulation = 0.0f;
 		}
-		population = newPopulation;
-		defense += (newPopulation - population); //
-		population = newPopulation;
+		populationParameters.setPopulation(newPopulation);
+		defense += (newPopulation - populationParameters.getPopulation()); //
+		populationParameters.setPopulation(newPopulation);
 
-		if (population == 0.0) {
+		if (populationParameters.getPopulation() == 0.0) {
 			endGame = true;
 		}
 
@@ -364,53 +324,35 @@ public final class GameData {
 
 		System.out.println("\nC) PRODUCTION\n");
 		System.out.println("Production affects the evolution of your tribe and the construction of buildings.");
-		
-		int productionGrowth=0;
+
+		int productionGrowth = 0;
 		System.out.println("- Production growth/turn: " + productionGrowth);
-		int productionTotal=0;
+		int productionTotal = 0;
 		System.out.println("- Total production points: " + productionTotal);
-		int productionPassiveGrowth=0;
+		int productionPassiveGrowth = 0;
 		System.out.println("- Passive prod. points/turn: " + productionPassiveGrowth);
-		int productionFromMountains=0;
+		int productionFromMountains = 0;
 		System.out.println("- Production from mountains per turn: " + productionFromMountains);
-		
+
 		System.out.println("\nD) CULTURE\n");
 		System.out.println("Culture unlocks technologies.");
-		
+
 		System.out.println("\nE) STRENGTH\n");
 		System.out.println("Strength provides protection from uninvited guests.");
-		
+
 		System.out.println("\nF) TURNS\n");
 		System.out.println("Turns reflect the current year and effect the development of humanity.");
-		
+
 		System.out.println("- Current turn: " + getTurn());
-		System.out.println("- " + getAge() + ": " + getDate() / 1000 + " years B.C.");
+		System.out.println("- " + dateParameters.getAge() + ": " + getDate() / 1000 + " years B.C.");
 
-
-
-	}
-
-	/**
-	 * @return
-	 */
-//	public int getDateRate() {
-//		return dateRate;
-//	}
-
-	/**
-	 * Change date delta between ticks.
-	 * 
-	 * @param dateRate
-	 */
-	public void setDateRate(int dateRate) {
-		this.dateRate = dateRate;
 	}
 
 	/**
 	 * @return
 	 */
 	public float getPopulationDelta() {
-		// TODO: duplicate code...
+		// TODO: remove duplicate code...
 		float foodConsumed = getCurrentPopulation();
 		float foodFromForestModifier = 2.4f;
 		float foodFromForest = foodFromForestModifier * getForestWorkers();
@@ -427,15 +369,6 @@ public final class GameData {
 	 */
 	public int getStrengthLevel() {
 		return defense;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getAge() {
-		// TODO complete age
-		return "Antiquity";
 	}
 
 	/**
@@ -470,4 +403,5 @@ public final class GameData {
 	public float getFoodConsumedPerTurn() {
 		return getCurrentPopulation();
 	}
+
 }

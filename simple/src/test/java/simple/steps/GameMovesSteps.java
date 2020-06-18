@@ -15,7 +15,6 @@ import simple.GameData;
  * @author marco.mangan@gmail.com
  *
  */
-public class GameStartSteps extends GameSteps {
-
+public class GameMovesSteps extends GameSteps {
 
 }

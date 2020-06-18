@@ -21,7 +21,7 @@ import static org.jbehave.core.reporters.Format.CONSOLE;
  * @author marco.mangan@gmail.com
  *
  */
-public class GameStartStories extends JUnitStories {
+public class GameMovesStories extends JUnitStories {
  
     @Override
     public Configuration configuration() {
