@@ -284,25 +284,25 @@ public final class GameData {
 
 		float populationDelta = (float) (foodTotal / 20.0);
 
-		System.out.println("A) POPULATION\n");
-		System.out.println("Employed tribesmen produce valuable resources. ");
-
-		System.out.println("- Current Population: " + populationParameters.getPopulation());
-		System.out.println("- Maximum Population: " + populationParameters.getPopulationMax());
-		System.out.println("- Pop. growth rate/turn: " + populationDelta);
-
-		System.out.println("\nB) FOOD\n");
-		System.out.println("Food - population growth. Every 20 food add 1 human. ");
-
-		System.out.println("- Food growth/turn: " + foodTotal);
-		System.out.println("- Food consumed per turn: " + foodConsumed);
-		System.out.println("- Food from forests/worker: " + foodFromForestModifier);
+//		System.out.println("A) POPULATION\n");
+//		System.out.println("Employed tribesmen produce valuable resources. ");
+//
+//		System.out.println("- Current Population: " + populationParameters.getPopulation());
+//		System.out.println("- Maximum Population: " + populationParameters.getPopulationMax());
+//		System.out.println("- Pop. growth rate/turn: " + populationDelta);
+//
+//		System.out.println("\nB) FOOD\n");
+//		System.out.println("Food - population growth. Every 20 food add 1 human. ");
+//
+//		System.out.println("- Food growth/turn: " + foodTotal);
+//		System.out.println("- Food consumed per turn: " + foodConsumed);
+//		System.out.println("- Food from forests/worker: " + foodFromForestModifier);
 		int foodFromSavannatModifier = 0;
-		System.out.println("- Food from savanna/worker: " + foodFromSavannatModifier);
+//		System.out.println("- Food from savanna/worker: " + foodFromSavannatModifier);
 		int foodFromRiversModifier = 0;
-		System.out.println("- Food from rivers/fisherman: " + foodFromRiversModifier);
+//		System.out.println("- Food from rivers/fisherman: " + foodFromRiversModifier);
 		int foodFromFieldsModifier = 0;
-		System.out.println("- Food from fields/farmer: " + foodFromFieldsModifier);
+//		System.out.println("- Food from fields/farmer: " + foodFromFieldsModifier);
 
 		float newPopulation = populationParameters.getPopulation();
 		newPopulation += populationDelta;
@@ -322,29 +322,29 @@ public final class GameData {
 
 		food = foodTotal;
 
-		System.out.println("\nC) PRODUCTION\n");
-		System.out.println("Production affects the evolution of your tribe and the construction of buildings.");
+//		System.out.println("\nC) PRODUCTION\n");
+//		System.out.println("Production affects the evolution of your tribe and the construction of buildings.");
 
 		int productionGrowth = 0;
-		System.out.println("- Production growth/turn: " + productionGrowth);
+//		System.out.println("- Production growth/turn: " + productionGrowth);
 		int productionTotal = 0;
-		System.out.println("- Total production points: " + productionTotal);
+//		System.out.println("- Total production points: " + productionTotal);
 		int productionPassiveGrowth = 0;
-		System.out.println("- Passive prod. points/turn: " + productionPassiveGrowth);
+//		System.out.println("- Passive prod. points/turn: " + productionPassiveGrowth);
 		int productionFromMountains = 0;
-		System.out.println("- Production from mountains per turn: " + productionFromMountains);
+//		System.out.println("- Production from mountains per turn: " + productionFromMountains);
 
-		System.out.println("\nD) CULTURE\n");
-		System.out.println("Culture unlocks technologies.");
-
-		System.out.println("\nE) STRENGTH\n");
-		System.out.println("Strength provides protection from uninvited guests.");
-
-		System.out.println("\nF) TURNS\n");
-		System.out.println("Turns reflect the current year and effect the development of humanity.");
-
-		System.out.println("- Current turn: " + getTurn());
-		System.out.println("- " + dateParameters.getAge() + ": " + getDate() / 1000 + " years B.C.");
+//		System.out.println("\nD) CULTURE\n");
+//		System.out.println("Culture unlocks technologies.");
+//
+//		System.out.println("\nE) STRENGTH\n");
+//		System.out.println("Strength provides protection from uninvited guests.");
+//
+//		System.out.println("\nF) TURNS\n");
+//		System.out.println("Turns reflect the current year and effect the development of humanity.");
+//
+//		System.out.println("- Current turn: " + getTurn());
+//		System.out.println("- " + dateParameters.getAge() + ": " + getDate() / 1000 + " years B.C.");
 
 	}
 
