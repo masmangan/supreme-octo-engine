@@ -12,5 +12,8 @@ Given a new game
 And 4 humans are allocated to forest food gathering
 When end turn
 Then current population is 8 humans
-And maximum population is 12 humans
 And population growth rate per turn is 0.0 humans/turn
+
+Examples:
+|gatherers|population|rate|
+|4|8|0.0
