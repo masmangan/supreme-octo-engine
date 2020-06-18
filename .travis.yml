@@ -1,3 +1,3 @@
 language: java
 script:
-  mvn -f ./simple/pom.xml
+  mvn test -f ./simple/pom.xml
